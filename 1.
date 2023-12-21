@@ -1,0 +1,104 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct bank {
+    int account_number;
+    char name[100];
+    float balance;
+} b[100];
+
+int n = 0;
+
+void create_account() {
+    printf("Enter account number: ");
+    scanf("%d", &b[n].account_number);
+    printf("Enter name: ");
+    scanf("%s", b[n].name);
+    printf("Enter balance: ");
+    scanf("%f", &b[n].balance);
+    n++;
+}
+
+void withdraw() {
+    int account_number, i;
+    float amount;
+    printf("Enter account number: ");
+    scanf("%d", &account_number);
+    for (i = 0; i < n; i++) {
+        if (b[i].account_number == account_number) {
+            printf("Enter amount to withdraw: ");
+            scanf("%f", &amount);
+            if (amount > b[i].balance) {
+                printf("Insufficient balance\n");
+                return;
+            }
+            b[i].balance -= amount;
+            printf("New balance: %.2f\n", b[i].balance);
+            return;
+        }
+    }
+    printf("Account not found\n");
+}
+
+void deposit() {
+    int account_number, i;
+    float amount;
+    printf("Enter account number: ");
+    scanf("%d", &account_number);
+    for (i = 0; i < n; i++) {
+        if (b[i].account_number == account_number) {
+            printf("Enter amount to deposit: ");
+            scanf("%f", &amount);
+            b[i].balance += amount;
+            printf("New balance: %.2f\n", b[i].balance);
+            return;
+        }
+    }
+    printf("Account not found\n");
+}
+
+void balance_inquiry() {
+    int account_number, i;
+    printf("Enter account number: ");
+    scanf("%d", &account_number);
+    for (i = 0; i < n; i++) {
+        if (b[i].account_number == account_number) {
+            printf("Balance: %.2f\n", b[i].balance);
+            return;
+        }
+    }
+    printf("Account not found\n");
+}
+
+int main() {
+    int choice;
+    while (1) {
+        printf("1. Create account\n");
+        printf("2. Withdraw\n");
+        printf("3. Deposit\n");
+        printf("4. Balance inquiry\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                create_account();
+                break;
+            case 2:
+                withdraw();
+                break;
+            case 3:
+                deposit();
+                break;
+            case 4:
+                balance_inquiry();
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+    return 0;
+}
