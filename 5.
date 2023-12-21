@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int find_last_occurrence(int arr[], int size, int num) {
+    int i, index = -1;
+    for (i = 0; i < size; i++) {
+        if (arr[i] == num) {
+            index = i;
+        }
+    }
+    return index;
+}
+
+int main() {
+    int arr[100], size, i, num, index;
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+    printf("Enter the elements of the array:\n");
+    for (i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the number to be searched: ");
+    scanf("%d", &num);
+    index = find_last_occurrence(arr, size, num);
+    if (index == -1) {
+        printf("%d is not present in the array\n", num);
+    } else {
+        printf("The last occurrence of %d is at index %d\n", num, index);
+    }
+    return 0;
+}
