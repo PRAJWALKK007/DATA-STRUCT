@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int search_element(int arr[][100], int rows, int cols, int element) {
+    int i, j;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            if (arr[i][j] == element) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int main() {
+    int arr[100][100], rows, cols, i, j, element;
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+    printf("Enter the elements of the array:\n");
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    printf("Enter the element to be searched: ");
+    scanf("%d", &element);
+    if (search_element(arr, rows, cols, element)) {
+        printf("%d is present in the array\n", element);
+    } else {
+        printf("%d is not present in the array\n", element);
+    }
+    return 0;
+}
